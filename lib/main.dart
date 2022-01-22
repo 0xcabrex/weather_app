@@ -37,14 +37,15 @@ class _WeatherAppState extends State<WeatherApp> {
     var searchResult = await http.get(searchApiUrl + input + searchApiKey);
     var result = json.decode(searchResult.body);
 
-    print(result['cod']);
+    if (kDebugMode) {
+      print(result['cod']);
+    }
 
     if (result['cod'] == 200) {
       if (kDebugMode) {
         print(result['name']);
         print((result['main']['temp'] - 273.0).toStringAsFixed(2));
         print(result['weather'][0]['main'].replaceAll(' ', '').toLowerCase());
-        //print("Latitude: ${position.latitude}\nLongitude: ${position.longitude}");
       }
 
       setState(() {
@@ -66,30 +67,7 @@ class _WeatherAppState extends State<WeatherApp> {
     }
   }
 
-  // Future<Position> fetchLocation() async {
-  //   LocationPermission permission;
-  //   permission = await Geolocator.checkPermission();
-  //   if (permission == LocationPermission.denied) {
-  //     permission = await Geolocator.requestPermission();
-  //   } else {
-  //     if (kDebugMode) {
-  //       print("Location Not Available");
-  //     }
-  //   }
-
-  //   return await Geolocator.getCurrentPosition();
-  // }
-
-  // void _getLocation() async {
-  //   Position? position = await fetchLocation();
-  //   if (kDebugMode) {
-  //     print("Latitude: ${position.latitude}, Longitude: ${position.longitude}");
-  //   }
-  // }
-
   void onTextFieldSubmitted(String input) {
-    // final position = fetchLocation();
-    //fetchSearch(input, position);
     fetchSearch(input);
   }
 
@@ -101,6 +79,7 @@ class _WeatherAppState extends State<WeatherApp> {
         decoration: BoxDecoration(
             image: DecorationImage(
           image: AssetImage('images/${weather.toLowerCase()}.png'),
+          opacity: 0.5,
           fit: BoxFit.fill,
         )),
         child: Scaffold(
@@ -112,6 +91,7 @@ class _WeatherAppState extends State<WeatherApp> {
                 // Temperature
                 Column(
                   children: <Widget>[
+                    // Temperature showing thing
                     Center(
                       child: Text(
                         temperatureString,
@@ -119,6 +99,7 @@ class _WeatherAppState extends State<WeatherApp> {
                         textAlign: TextAlign.center,
                       ),
                     ),
+                    // Place showing thing
                     Visibility(
                       visible: _isShowPlace,
                       maintainSize: true,
