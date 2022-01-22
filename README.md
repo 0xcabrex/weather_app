@@ -1,6 +1,6 @@
 # Weather App
 
-A Simple Weather application that shows you the weather of the city/state/locality you have entered.\
+A Simple Weather application that shows you the weather of the city/state/locality you have entered.
 
 Simple search functionality, 2 text widgets and a dynamic background that shows what the state of weather is in that place.
 
