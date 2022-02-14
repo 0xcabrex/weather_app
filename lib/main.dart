@@ -31,8 +31,6 @@ class _WeatherAppState extends State<WeatherApp> {
 
   String searchApiUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
   String searchApiKey = "&appid=e123ba1f3d29d1d6a315ca8d589a8605";
-  // String iconApiUrl1 = "https://openweathermap.org/img/wn/";
-  // String iconApiUrl2 = "@2x.png";
   String finalIconApiUrl = "https://openweathermap.org/img/wn/03d@2x.png";
 
   void _temperatureString(temperature) {
@@ -80,6 +78,8 @@ class _WeatherAppState extends State<WeatherApp> {
       setState(() {
         temperatureString = "Place not found";
         _isShowPlace = false;
+        _isShowIcon = false;
+        weather = 'clear';
       });
     }
   }
@@ -155,7 +155,7 @@ class _WeatherAppState extends State<WeatherApp> {
                     ),
                   ],
                 ),
-                // Location name
+                // Search bar
                 Column(
                   children: <Widget>[
                     Container(
